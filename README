@@ -1,0 +1,48 @@
+--------------------------------------------------------------------------
+--																		--
+-		README FILE														--
+--																		--
+-		Authors: Pablo Saz Dones and Marcos Baptista Rios				--
+--																		--
+-		Practica 1														--
+--																		--
+-		Computacion en Red --- UAH										--
+--																		--
+--																		--
+--------------------------------------------------------------------------
+
+
+	To run server:	 > env/bin/python run.py
+
+	Initializations in:  /app/__init__.py
+	
+	Logical application:
+
+		Views in: app/mod_iroom/controllers.py
+		Forms in: app/mod_iroom/forms.py
+
+		Periodic script to get diary number: periodic_sc.py
+			It's included in cron ( > crontab -l)
+
+		Script that gets number from 2013 to 2015 (executed one time):
+			get_histo.py
+						
+	HTML:
+		
+		HTML files in: app/templates/iroom/
+		Style file in: app/static/style.css
+	
+
+	MongoDB is intalled separately of Flask, to execute Mongod service:
+
+		> service mongod start
+
+---------------------------------------------------------------------------
+
+App directory:
+
+	server/ |
+			|
+			| app/
+			|
+			| 

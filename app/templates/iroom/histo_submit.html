@@ -1,0 +1,42 @@
+{% include 'iroom/header.html' %}		
+
+<div class="wrapper">
+			
+	{% include 'iroom/banner.html' %}
+				
+	<div id="wellcome"> 
+		<div class="title">
+			Comprueba cualquier numero desde 2013 hasta hoy!
+		</div>
+		<div class="form">
+			<form method="POST" action="/iroom/histo_check">
+				{{ form.hidden_tag() }}
+				<div id=inputs>
+					Numero: {{ form.nmbr(size=5, maxlength=5) }}
+					Serie:  {{ form.serie(size=3, maxlength=3) }}
+					<p>Fecha: {{form.date }}</p>
+				</div>
+				<div id="submit">
+					<input type="submit" value="Comprueba">
+				</div>
+			</form>
+			{% if form.validate() %}
+				{% if n == None %}
+					<div id="res_mssg">
+						{{ res_mssg }}
+					</div>
+				{% else %}
+					<div class="number">
+							<ul><li>{{ n1 }}</li><li>{{ n2 }}</li><li>{{ n3 }}</li><li>{{ n4 }}</li><li>{{ n5 }}</li></ul>
+					</div>
+					<div class="serie">
+						Serie: {{ tdy_serie }}
+					</div>
+					<div id="res_mssg">
+						El numero {{ form.nmbr.data }} y serie {{ form.serie.data }} {{ res_mssg }}
+					</div>
+				{% endif %}
+			{% endif %}
+		</div>
+	</div>
+	

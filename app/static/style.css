@@ -1,0 +1,278 @@
+div {
+	display: block;
+}
+
+body {
+	background-image: url("pics/wallpaper.jpg");
+}
+
+.wrapper {
+	width: 70%;
+	height: 80%;
+
+	position: relative;
+	left: 15%;
+}
+
+#logo img {
+	width: 250px;
+	height: 80px;
+	
+	margin-bottom: 8px;
+}
+
+.menu {	
+	margin-top: 5px;
+}
+
+.banner {
+	height: 27%;
+	padding: 15px 15px 5px 15px;
+	
+	position: relative;
+	
+	border: 2px solid white;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	background-color: #FFFFFF;
+}
+
+#home, #histo, #premio, #hora {
+
+	display: inline;
+	position: relative;
+	top: 90%;
+
+	text-align: center;
+	font-size: 1.2em;
+
+	margin-right: 5px;
+}
+
+.banner a {
+	padding: 2px 10px 2px 10px;
+	
+	font-family: "Verdana";
+	text-decoration: none;
+	color: darkgreen;
+	
+	border: 1px solid darkgreen;
+}
+
+.banner a:hover
+{
+	color: #FFD700;
+	border-color: #FFD700;
+}
+
+#wellcome {
+	background-image: url("pics/wallpaper_2.jpg");
+
+	position: relative;
+	top: 2%;
+}
+
+.footer {
+	width: 100%;
+	height: 20%;
+
+	position: relative;
+	top: 2%;
+
+	background-color: lightgray;
+	border: 2px solid black;
+}
+
+.form {
+	padding-bottom: 15px;
+}
+
+#nmbr, #serie {
+	font-weight: bold;
+	font-size: 1em;
+
+	padding: 2px 2px 2px 2px;
+}
+
+#nmbr {
+	padding-right: 5px;
+	width: 100px;
+	height: 25px;
+}
+
+#nmbr:focus, #nmbr:active, #serie:focus, #serie:active {
+	background-color: #F3F781;
+}
+
+#serie {
+	width: 40px;
+	height: 25px;
+}
+
+.date, .number, .serie, .form, .title {
+	padding: 15px 5px 15px 5px;
+	display: block;
+	
+	text-align: center;
+	font-family: "Verdana";
+}
+
+.title {
+	padding-top: 11%;
+	font-size: 1.6em;
+}
+
+.date {
+	padding-top: 8%;
+	font-size: 1.8em;
+}
+
+.number {
+	width: 100%;
+	padding-top: 5%;
+}
+
+.number ul li{
+	text-align: center;
+	font-family: "Verdana";
+	font-size: 1.8em;
+}
+
+.serie {
+	font-size: 1.2em;
+}
+
+#submit input {
+	border: 1px solid darkgreen;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	
+	font-size: 1em;
+	font-family: "Verdana";
+	text-decoration: none;
+	text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
+	font-weight: bold; 
+	color: darkgreen;
+	
+	padding: 15px 15px 15px 15px;
+	display: inline-block;
+	
+	background-color: #ffd65e; 
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ffd65e), to(#febf04));
+	background-image: -webkit-linear-gradient(top, #ffd65e, #febf04);
+	background-image: -moz-linear-gradient(top, #ffd65e, #febf04);
+	background-image: -ms-linear-gradient(top, #ffd65e, #febf04);
+	background-image: -o-linear-gradient(top, #ffd65e, #febf04);
+	background-image: linear-gradient(to bottom, #ffd65e, #febf04);
+	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffd65e, endColorstr=#febf04);
+}
+
+#submit input:hover {
+	border:1px solid #f7b800;
+	
+	background-color: #ffc92b; 
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc92b), to(#ce9a01));
+	background-image: -webkit-linear-gradient(top, #ffc92b, #ce9a01);
+	background-image: -moz-linear-gradient(top, #ffc92b, #ce9a01);
+	background-image: -ms-linear-gradient(top, #ffc92b, #ce9a01);
+	background-image: -o-linear-gradient(top, #ffc92b, #ce9a01);
+	background-image: linear-gradient(to bottom, #ffc92b, #ce9a01);
+	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffc92b, endColorstr=#ce9a01);
+}
+
+#inputs {
+	padding: 5px 5px 15px 5px;
+}
+
+ul {
+	margin: center;	
+	display: block;
+}
+
+li {
+	display: inline;
+
+	width: 85px;
+	height: 85px;
+
+	text-align: center;
+	font-weight: bold;
+	padding: 30px 30px 30px 30px;
+	line-height: 16px;
+
+	background: url("pics/bola.png") top left no-repeat;
+	list-style-type: none;
+}
+
+#res_mssg {
+	margin-left: 10%;
+	padding: 10px 10px 10px 10px;
+	border: 4px solid black;
+	width: 80%;
+
+	font-weight: bold;
+}
+
+table {
+	margin: 0 auto;
+	display: block;
+	
+	text-align: center;
+	padding-bottom: 12%;
+}
+
+th {
+	background-color: green;
+	padding: 2px 8px 2px 8px;
+}
+
+td {
+	background-color: lightyellow;
+
+	padding: 2px 8px 2px 8px;
+}
+
+.sub_menu {
+	position: absolute;
+	top: 8%;
+	left: 25%;	
+	
+	margin-bottom: 15px;
+}
+
+#diario, #cuponazo, #sueldazo {
+	display: inline;
+	margin-right: 5px;
+}
+
+.sub_menu a {
+	padding: 2px 10px 2px 10px;
+
+	border: 1px solid #FFD700;
+	text-align: center;
+	
+	color: #FFD700;
+	font-family: "Verdana";
+	text-decoration: none;
+}
+
+.sub_menu a:hover {
+	color: darkgreen;
+	border-color: darkgreen;
+}
+
+#bells {
+	width: 230px;
+	height: 230px;
+}
+
+.christmas {
+	z-index: 1;
+	position: absolute;
+	
+	right: 0px;
+	top: 65px;
+}

@@ -1,0 +1,40 @@
+{% include 'iroom/header.html' %}
+
+<div class="wrapper">
+	
+	{% include 'iroom/banner.html' %}
+	<div id="wellcome"> 
+		<div class="date">
+			{{ today_date }}
+		</div>
+		<div class="number">
+			<ul><li>{{ n1 }}</li><li>{{ n2 }}</li><li>{{ n3 }}</li><li>{{ n4 }}</li><li>{{ n5 }}</li></ul>
+		</div>
+		<div class="serie">
+			Serie: {{ today_serie }}
+		</div>
+		<div class="form">
+			<form method="POST" action="/iroom/">
+				<div id="inputs">
+					{{ form.hidden_tag() }}
+					Numero: {{ form.nmbr(size=5, maxlength=5) }}
+					Serie:  {{ form.serie(size=3, maxlength=3) }}
+				</div>
+				<div id="submit">
+					<input type="submit" value="Comprueba Ahora!">
+				</div>
+			</form>
+			{% if form.validate() %}
+				{% if n == None %}
+					<div id="res_mssg">
+						{{ res_mssg }}
+					</div>
+				{% else %}
+					<div id="res_mssg">
+						El numero {{ form.nmbr.data }} y serie {{ form.serie.data }} {{ res_mssg }}
+					</div>
+				{% endif %}
+			{% endif %}
+		</div>
+	</div>
+
