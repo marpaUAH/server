@@ -24,6 +24,10 @@ one_day = datetime.timedelta(days=1)
 today = datetime.date.today()
 yesterday = today - one_day
 
+### Funcion para obtener un objeto datetime a partir de 'yyyy-mm-dd'
+def object_date(fdate):
+	return datetime.date(int(fdate[0:4]), int(fdate[5:7]), int(fdate[8:10]))
+
 # Route '/'
 @mod_iroom.route('/', methods=('POST', 'GET'))
 def index():
@@ -32,13 +36,17 @@ def index():
 	
 	# Read from MongoDB
 	foundoc = lnumbers.find().sort('_id',-1)
+
 	if foundoc == None:
 		n = None
 		s = None
 	else:
 		n = foundoc[0]['number']
 		s = foundoc[0]['serie']
+		d = foundoc[0]['date']
 
+	wd = object_date(d).strftime('%a')
+	
 	if form.validate_on_submit():
 		# Check if the number is the winner
 		if n == None:
@@ -46,27 +54,67 @@ def index():
 
 		elif n == form.nmbr.data:
 			if int(s) == int(form.serie.data):
-				prize = 'ha recibido un premio de 35.000 euros y si juega La Paga 3.000 al mes durante 25 anos!'
+				if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+					prize = 'ha recibido un premio de 35.000 euros y si juega La Paga 3.000 al mes durante 25 anos!'
+				elif wd == 'Fri':
+					prize = 'ha recibido un premio de 9.000.000 euros'
+				elif (wd == 'Sat') or (wd == 'Sun'):
+					prize = 'ha recibido un premio de 300.000 euros y si juega La Paga 5.000 al mes durante 20 anos'
 			else:
-				prize = 'ha recibido un premio de 35.000 euros'
+				if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+					prize = 'ha recibido un premio de 35.000 euros'
+				elif wd == 'Fri':
+					prize = 'ha recibido un premio de 30.000 euros'
+				elif (wd == 'Sat') or (wd == 'Sun'):
+					prize = 'ha recibido un premio de 20.000 euros'
 
 		elif (int(n) == int(form.nmbr.data)+1) or (int(n) == int(form.nmbr.data)-1):
-			prize = 'ha recibido un premio de 500 euros'
+			if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+				prize = 'ha recibido un premio de 500 euros'
+			elif wd == 'Fri':
+				prize = 'no ha recibido ningun premio.'
+			elif (wd == 'Sat') or (wd == 'Sun'):
+				prize = 'no ha recibido ningun premio.'
 		
 		elif n[1:5] == form.nmbr.data[1:5]:
-			prize = 'ha recibido un premio de 200 euros'
+			if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+				prize = 'ha recibido un premio de 200 euros'
+			elif wd == 'Fri':
+				prize = 'ha recibido un premio de 500 euros'
+			elif (wd == 'Sat') or (wd == 'Sun'):
+				prize = 'ha recibido un premio de 200 euros'
 
 		elif n[2:5] == form.nmbr.data[2:5]:
-			prize = 'ha recibido un premio de 20 euros'
+			if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+				prize = 'ha recibido un premio de 20 euros'
+			elif wd == 'Fri':
+				prize = 'ha recibido un premio de 50 euros'
+			elif (wd == 'Sat') or (wd == 'Sun'):
+				prize = 'ha recibido un premio de 30 euros'
 
 		elif n[3:5] == form.nmbr.data[3:5]:
-			prize = 'ha recibido un premio de 6 euros'
+			if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+				prize = 'ha recibido un premio de 6 euros'
+			elif wd == 'Fri':
+				prize = 'ha recibido un premio de 6 euros'
+			elif (wd == 'Sat') or (wd == 'Sun'):
+				prize = 'ha recibido un premio de 4 euros'
 		
 		elif (n[4] == form.nmbr.data[4]) or (n[0] == form.nmbr.data[0]):
 			if int(s) == int(form.serie.data):
-				prize = 'ha recibido un premio de 1.50 euros mas 0.50 euros si juega La Paga'
+				if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+					prize = 'ha recibido un premio de 1.50 euros mas 0.50 euros si juega La Paga'
+				elif wd == 'Fri':
+					prize = 'ha recibido un premio de 3 euros'
+				elif (wd == 'Sat') or (wd == 'Sun'):
+					prize = 'ha recibido un premio de 2 euros'
 			else:
-				prize = 'ha recibido 1.50 euros'
+				if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+					prize = 'ha recibido 2 euros'
+				elif wd == 'Fri':
+					prize = 'ha recibido un premio de 3 euros'
+				elif (wd == 'Sat') or (wd == 'Sun'):
+					prize = 'ha recibido 2 euros'
 		else:
 			prize = 'no ha recibido ningun premio.'
 
@@ -90,36 +138,79 @@ def histo_check():
 		else:
 			n = foundoc['number']
 			s = foundoc['serie']
+			d = foundoc['date']
+
+		wd = object_date(d).strftime('%a')
 		
 		# Check if the number is the winner
 		if n == None:
-			prize = 'Aun no disponemos de este numero'
+			prize = 'Aun no disponemos del ultimo numero'
 
 		elif n == form.nmbr.data:
 			if int(s) == int(form.serie.data):
-				prize = 'recibio un premio de 35.000 euros y si juega La Paga 3.000 al mes durante 25 anos!'
+				if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+					prize = 'ha recibido un premio de 35.000 euros y si juega La Paga 3.000 al mes durante 25 anos!'
+				elif wd == 'Fri':
+					prize = 'ha recibido un premio de 9.000.000 euros'
+				elif (wd == 'Sat') or (wd == 'Sun'):
+					prize = 'ha recibido un premio de 300.000 euros y si juega La Paga 5.000 al mes durante 20 anos'
 			else:
-				prize = 'recibio un premio de 35.000 euros'
+				if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+					prize = 'ha recibido un premio de 35.000 euros'
+				elif wd == 'Fri':
+					prize = 'ha recibido un premio de 30.000 euros'
+				elif (wd == 'Sat') or (wd == 'Sun'):
+					prize = 'ha recibido un premio de 20.000 euros'
 
-		elif (int(n) == int(form.nmbr.data)+1) or (int(n) == int(form.nmbr.data)+1):
-			prize = 'recibio un premio de 500 euros'
+		elif (int(n) == int(form.nmbr.data)+1) or (int(n) == int(form.nmbr.data)-1):
+			if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+				prize = 'ha recibido un premio de 500 euros'
+			elif wd == 'Fri':
+				prize = 'no ha recibido ningun premio.'
+			elif (wd == 'Sat') or (wd == 'Sun'):
+				prize = 'no ha recibido ningun premio.'
 		
 		elif n[1:5] == form.nmbr.data[1:5]:
-			prize = 'recibio un premio de 200 euros'
+			if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+				prize = 'ha recibido un premio de 200 euros'
+			elif wd == 'Fri':
+				prize = 'ha recibido un premio de 500 euros'
+			elif (wd == 'Sat') or (wd == 'Sun'):
+				prize = 'ha recibido un premio de 200 euros'
 
 		elif n[2:5] == form.nmbr.data[2:5]:
-			prize = 'recibio un premio de 20 euros'
+			if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+				prize = 'ha recibido un premio de 20 euros'
+			elif wd == 'Fri':
+				prize = 'ha recibido un premio de 50 euros'
+			elif (wd == 'Sat') or (wd == 'Sun'):
+				prize = 'ha recibido un premio de 30 euros'
 
 		elif n[3:5] == form.nmbr.data[3:5]:
-			prize = 'recibio un premio de 6 euros'
+			if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+				prize = 'ha recibido un premio de 6 euros'
+			elif wd == 'Fri':
+				prize = 'ha recibido un premio de 6 euros'
+			elif (wd == 'Sat') or (wd == 'Sun'):
+				prize = 'ha recibido un premio de 4 euros'
 		
 		elif (n[4] == form.nmbr.data[4]) or (n[0] == form.nmbr.data[0]):
 			if int(s) == int(form.serie.data):
-				prize = 'recibio un premio de 1.50 euros mas 0.50 euros si juega La Paga'
+				if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+					prize = 'ha recibido un premio de 1.50 euros mas 0.50 euros si juega La Paga'
+				elif wd == 'Fri':
+					prize = 'ha recibido un premio de 3 euros'
+				elif (wd == 'Sat') or (wd == 'Sun'):
+					prize = 'ha recibido un premio de 2 euros'
 			else:
-				prize = 'recibio 1.50 euros'
+				if (wd == 'Mon') or (wd == 'Tue') or (wd == 'Wed') or (wd == 'Thu'):
+					prize = 'ha recibido 2 euros'
+				elif wd == 'Fri':
+					prize = 'ha recibido un premio de 3 euros'
+				elif (wd == 'Sat') or (wd == 'Sun'):
+					prize = 'ha recibido 2 euros'
 		else:
-			prize = 'no recibio ningun premio.'
+			prize = 'no ha recibido ningun premio.'
 		
 		if n == None:
 			return render_template('iroom/histo_submit.html', form = form, res_mssg = prize, n = n)

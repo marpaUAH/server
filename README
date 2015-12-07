@@ -37,9 +37,6 @@
 
 		> service mongod start
 
-	To update GitHub repositori run git.sh script:
-		
-		> ./git.sh
 
 ---------------------------------------------------------------------------
 
