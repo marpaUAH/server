@@ -1,2 +1,7 @@
 #ignore this directories
 env
+
+#ignore this files
+*.pyc
+app/*.pyc
+app/mod_iroom/*.pyc
