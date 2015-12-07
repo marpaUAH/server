@@ -27,24 +27,19 @@ def object_date(fdate):
 # Comienzo del script
 
 # First check the last element on DBs
-
 # Beebotte
 foundoc_b = bclient.read('Lottery', 'Date', limit=1)
 foundoc_b = object_date(foundoc_b[0]['data'])
 
 #MongoDB
-one_day = datetime.timedelta(days=1)
-today = datetime.date.today()
-
-# Check just the last 6 days
-for i in range(6):
-	foundoc_m = lnumbers.find_one({ 'date' : (today-i*one_day).strftime('%Y-%m-%d') })
-	if foundoc_m != None:
-		break
-foundoc_m = object_date(foundoc_m['date'])
+foundoc_m = lnumbers.find().sort('_id', -1)
+foundoc_m = object_date(foundoc_m[0]['date'])
 
 # Determine the number of dates that are necessary to get from the HTML code based on the difference between the last date stored and the current date
+one_day = datetime.timedelta(days=1)
+today = datetime.date.today()
 yesterday = today - one_day
+
 b_times = int((yesterday-foundoc_b).days)
 m_times = int((yesterday-foundoc_m).days)
 
@@ -52,7 +47,7 @@ m_times = int((yesterday-foundoc_m).days)
 f = urllib2.urlopen('http://www.resultados11.es')
 results = re.findall('<div id="bolas">.+?</div>|<div class="center fs16">.+?</div>|>[0-9]{3}<', f.read())
 l_num = []	
-pdb.set_trace()
+
 # Clean the list to keep only numbers
 for x in results:
 	num = ""
@@ -62,8 +57,15 @@ for x in results:
 	if len(num) != 0:
 		l_num.append(num)
 
+# Limit the number to 7
+if b_times > 7:
+	b_times = 7
+
+if m_times > 7:
+	m_times = 7
+
 ### Write on Beebotte database ### 
-for x in range(b_times):
+for x in reversed(range(b_times)):
 
 	try:
 		bclient.write('Lottery', 'Number', l_num[3*x+1])
@@ -74,7 +76,7 @@ for x in range(b_times):
 		print('Beebotte. Fallo al publicar.')
 
 ### Write on MongoBD ###
-for x in range(m_times):
+for x in reversed(range(m_times)):
 	
 	doc = {
 			'number' : l_num[3*x+1],
