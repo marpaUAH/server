@@ -20,6 +20,9 @@ def format_date(sdate):
 	y = sdate[4:8]
 	return y+'-'+m+'-'+d
 
+def raw_date(sdate):
+	return int(sdate[0:4]+sdate[5:7]+sdate[8:10])
+
 # Clean the list in order to get a list on the following form: (date(yyyy-mm-dd), number, serie)
 def clean_list(l_num):
 
@@ -48,7 +51,7 @@ def clean_list(l_num):
 	return clist
 
 # Get HTML code from 2013, 2014 and 2015 numbers
-sites = {'2013', '2014', '2015' } 
+sites = ('2013', '2014', '2015') 
 ylist = [] 
 
 
@@ -70,7 +73,6 @@ for x in sites:
 
 	# l_num contains a list like that: (date, x, digit, digit, digit, digit, digit, serie, date, x, and so on...) Where 'x' is a number we aren't interested in
 	ylist.append(clean_list(l_num))
-pdb.set_trace()
 # At this point every date has been stored in a list of list with the form: (date, number, serie). One list per year.
 # Store all the elements on MongoDB
 for x in ylist:
@@ -86,8 +88,7 @@ for x in ylist:
 			  }
 		lnumbers.insert_one(doc)
 		
-		bclient.write('Lottery', 'Date', d)
-		bclient.write('Lottery', 'Number', n)
-		bclient.write('Lottery', 'Serie', s)
+		bclient.write('Lottery', 'Date', int(raw_date(d)))
+		bclient.write('Lottery', 'Number', int(n))
+		bclient.write('Lottery', 'Serie', int(s))
 		
-	

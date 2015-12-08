@@ -20,16 +20,23 @@ def format_date(sdate):
 	day = sdate[2:4]
 	return year+'-'+month+'-'+day
 
+def raw_date(sdate):
+	return int(sdate[0:4]+sdate[5:7]+sdate[8:10])
+
 ### Funcion para obtener un objeto datetime a partir de 'yyyy-mm-dd'
 def object_date(fdate):
 	return datetime.date(int(fdate[0:4]), int(fdate[5:7]), int(fdate[8:10]))
 
-# Comienzo del script
+### Funcion para obtener un objeto datetime a partir de 'yyyy-mm-dd'
+def int_todate(rdate):
+	fdate=str(rdate)
+	return datetime.date(int(fdate[0:4]), int(fdate[4:6]), int(fdate[6:8]))
 
+# Comienzo del script
 # First check the last element on DBs
 # Beebotte
 foundoc_b = bclient.read('Lottery', 'Date', limit=1)
-foundoc_b = object_date(foundoc_b[0]['data'])
+foundoc_b = int_todate(foundoc_b[0]['data'])
 
 #MongoDB
 foundoc_m = lnumbers.find().sort('_id', -1)
@@ -66,11 +73,10 @@ if m_times > 7:
 
 ### Write on Beebotte database ### 
 for x in reversed(range(b_times)):
-
 	try:
-		bclient.write('Lottery', 'Number', l_num[3*x+1])
-		bclient.write('Lottery', 'Date', format_date(l_num[3*x]))
-		bclient.write('Lottery', 'Serie', l_num[3*x+2])
+		bclient.write('Lottery', 'Number', int(l_num[3*x+1]))
+		bclient.write('Lottery', 'Date', int(raw_date(format_date(l_num[3*x]))))
+		bclient.write('Lottery', 'Serie', int(l_num[3*x+2]))
 
 	except Exception:
 		print('Beebotte. Fallo al publicar.')

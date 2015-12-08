@@ -39,7 +39,7 @@ body {
 	background-color: #FFFFFF;
 }
 
-#home, #histo, #premio, #hora {
+#home, #histo, #premio, #hora, #link {
 
 	display: inline;
 	position: relative;
