@@ -251,10 +251,10 @@ td {
 .sub_menu a {
 	padding: 2px 10px 2px 10px;
 
-	border: 1px solid #FFD700;
+	border: 1px solid #8A0808;
 	text-align: center;
 	
-	color: #FFD700;
+	color: #8A0808;
 	font-family: "Verdana";
 	text-decoration: none;
 }
@@ -275,4 +275,17 @@ td {
 	
 	right: 0px;
 	top: 65px;
+}
+
+#histo_title {
+	color: #B40404;
+	padding-top: 5%;	
+
+}
+
+marquee {
+	border: 3px solid #8A0808;
+	width: 50%;
+	height: 40px;
+	padding: 7px 5px 3px 5px;
 }

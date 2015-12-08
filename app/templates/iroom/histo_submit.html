@@ -5,8 +5,10 @@
 	{% include 'iroom/banner.html' %}
 				
 	<div id="wellcome"> 
-		<div class="title">
-			Comprueba cualquier numero desde 2013 hasta hoy!
+		<div class="title" id="histo_title">
+			<marquee style="width:50%;" behavior="scroll" scrollamount="5">
+				Comprueba cualquier numero desde 2013 hasta hoy!
+			</marquee>
 		</div>
 		<div class="form">
 			<form method="POST" action="/iroom/histo_check">
