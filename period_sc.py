@@ -72,16 +72,22 @@ if m_times > 7:
 	m_times = 7
 
 ### Write on Beebotte database ### 
+print('Numeros escritos en Beebotte: '+str(b_times))
+
 for x in reversed(range(b_times)):
 	try:
 		bclient.write('Lottery', 'Number', int(l_num[3*x+1]))
 		bclient.write('Lottery', 'Date', int(raw_date(format_date(l_num[3*x]))))
 		bclient.write('Lottery', 'Serie', int(l_num[3*x+2]))
 
+		print('\tEscrito:: '+l_num[3*x]+'\t'+l_num[3*x+1]+'\t'+l_num[3*x+2])
+	
 	except Exception:
 		print('Beebotte. Fallo al publicar.')
 
 ### Write on MongoBD ###
+print('Numeros escritos en MongoDB: '+str(m_times))
+
 for x in reversed(range(m_times)):
 	
 	doc = {
@@ -91,5 +97,6 @@ for x in reversed(range(m_times)):
 		  }
 
 	lnumbers.insert_one(doc)
-
+	
+	print('\tEscrito:: '+l_num[3*x]+'\t'+l_num[3*x+1]+'\t'+l_num[3*x+2])
 
